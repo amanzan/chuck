@@ -16,10 +16,12 @@
 package com.readystatesoftware.chuck.internal.ui;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.readystatesoftware.chuck.internal.support.NotificationHelper;
+
+import org.jetbrains.annotations.Nullable;
 
 public abstract class BaseChuckActivity extends AppCompatActivity {
 

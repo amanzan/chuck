@@ -18,15 +18,6 @@ package com.readystatesoftware.chuck.internal.ui;
 import android.content.Context;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.LoaderManager;
-import android.support.v4.content.CursorLoader;
-import android.support.v4.content.Loader;
-import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SearchView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -34,12 +25,24 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SearchView;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.loader.app.LoaderManager;
+import androidx.loader.content.CursorLoader;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.readystatesoftware.chuck.R;
 import com.readystatesoftware.chuck.internal.data.ChuckContentProvider;
 import com.readystatesoftware.chuck.internal.data.HttpTransaction;
 import com.readystatesoftware.chuck.internal.support.NotificationHelper;
 import com.readystatesoftware.chuck.internal.support.SQLiteUtils;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class TransactionListFragment extends Fragment implements
         SearchView.OnQueryTextListener, LoaderManager.LoaderCallbacks<Cursor> {
@@ -50,7 +53,7 @@ public class TransactionListFragment extends Fragment implements
 
     public TransactionListFragment() {}
 
-    public static TransactionListFragment newInstance() {
+    public static androidx.fragment.app.Fragment newInstance() {
         return new TransactionListFragment();
     }
 
@@ -124,7 +127,7 @@ public class TransactionListFragment extends Fragment implements
     }
 
     @Override
-    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+    public androidx.loader.content.Loader<Cursor> onCreateLoader(int id, Bundle args) {
         CursorLoader loader = new CursorLoader(getContext());
         loader.setUri(ChuckContentProvider.TRANSACTION_URI);
         if (!TextUtils.isEmpty(currentFilter)) {
@@ -142,12 +145,12 @@ public class TransactionListFragment extends Fragment implements
     }
 
     @Override
-    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+    public void onLoadFinished(@NonNull @NotNull androidx.loader.content.Loader<Cursor> loader, Cursor data) {
         adapter.swapCursor(data);
     }
 
     @Override
-    public void onLoaderReset(Loader<Cursor> loader) {
+    public void onLoaderReset(@NonNull @NotNull androidx.loader.content.Loader<Cursor> loader) {
         adapter.swapCursor(null);
     }
 
